@@ -3,11 +3,14 @@ import { ref, nextTick, onMounted } from 'vue'
 
 const showReload = ref(false)
 
+const previewUrl = ref('')
+
 const createObjectURL = (file) => {
   if (typeof window !== 'undefined' && window.URL) {
-    return window.URL.createObjectURL(file)
+    previewUrl.value = window.URL.createObjectURL(file)
+  } else {
+    previewUrl.value = ''
   }
-  return ''
 }
 
 const photo = ref(null)
@@ -50,6 +53,7 @@ const handleFileChange = (e) => {
   const file = e.target?.files?.[0]
   if (file) {
     photo.value = file
+    createObjectURL(file)
   }
 }
 
@@ -72,7 +76,7 @@ onMounted(loadImages)
         <input ref="fileInput" type="file" class="form-control" accept="image/*" @change="handleFileChange" />
       </div>
       <div v-if="photo" class="mb-3">
-        <img :src="createObjectURL(photo)" alt="Anteprima" class="img-thumbnail" style="max-height: 200px;" />
+        <img :src="previewUrl" alt="Anteprima" class="img-thumbnail" style="max-height: 200px;" />
       </div>
       <button
         v-if="photo && !isLoading"
@@ -85,8 +89,8 @@ onMounted(loadImages)
         <span class="visually-hidden">Caricamento...</span>
       </div>
       <div v-if="message" class="alert alert-success mt-4">{{ message }} 
-<!--     <br>
-        <button v-if="showReload" class="btn btn-secondary mt-3" @click="reloadPage">🔄 Ricarica la pagina</button>-->  
+      <br>
+        <button v-if="showReload" class="btn btn-secondary mt-3" @click="reloadPage">🔄 Ricarica la pagina</button>
       </div>
       <div v-if="images.length" class="mt-5" :key="images.length">
         <h2 class="mb-3">🎉 Galleria Foto</h2>
