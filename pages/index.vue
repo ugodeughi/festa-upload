@@ -84,8 +84,9 @@ onMounted(loadImages)
       <div v-if="isLoading" class="spinner-border text-primary" role="status">
         <span class="visually-hidden">Caricamento...</span>
       </div>
-      <div v-if="message" class="alert alert-success mt-4">{{ message }} <br>
-        <button v-if="showReload" class="btn btn-secondary mt-3" @click="reloadPage">🔄 Ricarica la pagina</button>
+      <div v-if="message" class="alert alert-success mt-4">{{ message }} 
+<!--     <br>
+        <button v-if="showReload" class="btn btn-secondary mt-3" @click="reloadPage">🔄 Ricarica la pagina</button>-->  
       </div>
       <div v-if="images.length" class="mt-5" :key="images.length">
         <h2 class="mb-3">🎉 Galleria Foto</h2>
