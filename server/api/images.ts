@@ -7,11 +7,22 @@ cloudinary.config({
 })
 
 export default defineEventHandler(async () => {
-  const res = await cloudinary.search
-    .expression('resource_type:image AND folder="festa-foto"')
-    .sort_by('created_at','desc')
-    .max_results(30)
-    .execute()
+  try {
+    console.log("CLOUDINARY ENV:", {
+      name: process.env.CLOUDINARY_CLOUD_NAME,
+      key: process.env.CLOUDINARY_API_KEY,
+      secret: process.env.CLOUDINARY_API_SECRET ? '***' : 'MISSING'
+    })
 
-  return res.resources.map((r: any) => r.secure_url)
+    const res = await cloudinary.search
+      .expression('resource_type:image AND folder="festa-foto"')
+      .sort_by('created_at','desc')
+      .max_results(30)
+      .execute()
+
+    return res.resources.map((r: any) => r.secure_url)
+  } catch (error) {
+    console.error("CLOUDINARY ERROR:", error)
+    throw createError({ statusCode: 500, message: 'Errore caricamento immagini' })
+  }
 })
