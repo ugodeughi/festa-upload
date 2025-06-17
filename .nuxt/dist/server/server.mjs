@@ -1,0 +1,1 @@
+export { default } from "file:///Users/sc/Documents/varie/festa-upload-bootstrap/node_modules/@nuxt/vite-builder/dist/runtime/vite-node.mjs"

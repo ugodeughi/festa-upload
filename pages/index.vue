@@ -70,7 +70,7 @@ onMounted(loadImages)
   <div class="bg-wrapper">
     <div class="container py-5 text-center">
       <h1 class="mb-4">
-        Davide <span style="color: red;">&hearts;</span> Simone
+        SIMONE <span style="color: red;">&hearts;</span> DAVIDE
       </h1>
       <div class="mb-3">
         <input ref="fileInput" type="file" class="form-control" accept="image/*" @change="handleFileChange" />
@@ -93,7 +93,7 @@ onMounted(loadImages)
         <button v-if="showReload" class="btn btn-secondary mt-3" @click="reloadPage">🔄 Ricarica la pagina</button>
       </div>
       <div v-if="images.length" class="mt-5" :key="images.length">
-        <h2 class="mb-3">🎉 Galleria Foto</h2>
+        <h2 class="mb-3"><span style="color: red;">&hearts;</span>  Galleria Foto <span style="color: red;">&hearts;</span> </h2>
         <div class="row g-3">
           <div class="col-12 col-sm-6 col-md-3" v-for="url in images" :key="url">
             <img :src="url" class="img-fluid rounded shadow-sm" />
@@ -106,9 +106,9 @@ onMounted(loadImages)
 
 <style scoped>
 .bg-wrapper {
-  background-image: url('https://www.discoverbiella.com/orangeCMS/repo/immagini/Home-luoghi-ricetto-candelo_0724b9e57e.jpg');
-  background-size: cover;
-  background-position: center;
+  background-image: url('https://cavallazzi.com/wp-content/uploads/2018/12/candelo-ricetto-di-candelo_0604-650x975.jpg');
+  background-size:100%;
+   /* background-position: center; */
   background-repeat: no-repeat;
   min-height: 100vh;
   width: 100%;
@@ -118,12 +118,13 @@ onMounted(loadImages)
   padding: 2rem;
   position: relative;
   z-index: 0;
+  background-color:rgb(94, 61, 38);
 }
 .bg-wrapper::before {
   content: "";
   position: absolute;
   inset: 0;
-  background-color: rgba(255, 255, 255, 0.85);
+  background-color: rgba(255, 255, 255, 0.3);
   z-index: -1;
 }
 .container {
