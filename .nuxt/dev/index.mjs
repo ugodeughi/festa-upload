@@ -1788,7 +1788,7 @@ const images = defineEventHandler(async () => {
       key: process.env.CLOUDINARY_API_KEY,
       secret: process.env.CLOUDINARY_API_SECRET ? "***" : "MISSING"
     });
-    const res = await v2.search.expression('resource_type:image AND folder="festa-foto"').sort_by("created_at", "desc").max_results(30).execute();
+    const res = await v2.search.expression('resource_type:image AND folder="simone-davide"').sort_by("created_at", "desc").max_results(30).execute();
     return res.resources.map((r) => r.secure_url);
   } catch (error) {
     console.error("CLOUDINARY ERROR:", error);
@@ -1812,11 +1812,11 @@ const upload_post = defineEventHandler(async (event) => {
     const form = formidable({ keepExtensions: true, multiples: false });
     const [fields, files] = await form.parse(event.node.req);
     const file = (_a = files.photo) == null ? void 0 : _a[0];
-    if (!file) {
-      throw createError({ statusCode: 400, message: "No file uploaded" });
+    if (!file || !file.mimetype || !file.mimetype.startsWith("image/")) {
+      throw createError({ statusCode: 400, message: "Solo file immagine consentiti" });
     }
     const result = await v2.uploader.upload(file.filepath, {
-      folder: "festa-foto"
+      folder: "simone-davide"
     });
     return { url: result.secure_url };
   } catch (err) {

@@ -21,7 +21,7 @@ export default defineEventHandler(async () => {
     })
 
     const res = await cloudinary.search
-      .expression('resource_type:image AND folder="festa-foto"')
+      .expression('resource_type:image AND folder="simone-davide"')
       .sort_by('created_at','desc')
       .max_results(30)
       .execute()
